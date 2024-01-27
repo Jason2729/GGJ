@@ -4,36 +4,15 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
-    public float projectileSpeed;
-    public GameObject impactEffect;
-    public GameObject target;
+    public float _speed = 5f;
+    public Rigidbody2D _rb;
 
-    private Vector3 targetDirection;
-    private Rigidbody2D rigidbody;
-    // Start is called before the first frame update
-    void Start()
+    // initialize with direction
+    public void Init(Vector2 dir)
     {
-        rigidbody = GetComponent<Rigidbody2D>();
-        rigidbody.velocity = -transform.right * projectileSpeed;
-    }
-
-    private void FixedUpdate()
-    {
-        // get position of target
-        targetDirection = target.transform.position;
-        // covert 2d vector to 3d vector
-        targetDirection = Camera.main.ScreenToWorldPoint(targetDirection); 
-        targetDirection.z = 0;
+        _rb = GetComponent<Rigidbody2D>();
         // set velocity of projectile
-        if (targetDirection.x < transform.position.x)
-        {
-            rigidbody.velocity = transform.right * projectileSpeed;
-        }
-        else
-        {
-            rigidbody.velocity = -transform.right * projectileSpeed;
-        }
-                
+        _rb.velocity = dir * _speed;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -41,23 +20,15 @@ public class Projectile : MonoBehaviour
         // impact effect
         //Instantiate(impactEffect, transform.position, Quaternion.identity);
 
-        // some effect on player
-        /*
+        /* some effect on player
         if (collision.tag == "Player")
         {
-            var playerHealth = GetComponent<playerHealth>();
-            if (playerHealth != null)
-            {
-                playerHealth -= 1;
-            
-            }
-        }
-         */
-        if (collision.tag != "Enemy")
-        {
-            // destroy projectile
-            Destroy(gameObject);
-        }
+            collision.transform.GetComponent<Player>.effect();
+        }*/
+         
+        // destroy projectile
+        Destroy(gameObject);
+        
             
     }
 }
