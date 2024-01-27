@@ -21,7 +21,14 @@ public class Health : MonoBehaviour
         currentHp -= damage;
         if (currentHp <= 0)
         {
-            Agent.GetComponent<PlayerController>().Die();
+            if (Agent.GetComponent<PlayerController>() != null)
+            {
+                Agent.GetComponent<PlayerController>().Die();
+            }
+            if (Agent.GetComponent<PlayerController>() != null) 
+            {
+                Agent.GetComponent<EnemyAI>().Die();
+            }
         }
     }
 }

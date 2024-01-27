@@ -6,7 +6,7 @@ using UnityEngine.UIElements;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] private float playerSpeed = 3.0f;
+    [SerializeField] private float playerSpeed = 5.0f;
     [SerializeField] private Animator playerAnimator;
     [SerializeField] private AudioSource audioSource;
     [SerializeField] private AudioClip wallHitAudioClip;
