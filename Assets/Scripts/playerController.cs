@@ -6,10 +6,10 @@ using UnityEngine.UIElements;
 
 public class PlayerController : MonoBehaviour
 {
-    public float playerSpeed = 3.0f;
-    public Animator playerAnimator;
-    public AudioSource audioSource;
-    public AudioClip wallHitAudioClip;
+    [SerializeField] private float playerSpeed = 3.0f;
+    [SerializeField] private Animator playerAnimator;
+    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private AudioClip wallHitAudioClip;
 
     // Start is called before the first frame update
     void Start()
@@ -38,5 +38,11 @@ public class PlayerController : MonoBehaviour
         {
             transform.Translate(playerSpeed * Time.deltaTime, 0, 0);
         }
+    }
+
+    public void Die()
+    {
+        Debug.Log("player died!");
+        Destroy(gameObject);
     }
 }

@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
-    public float _speed = 5f;
-    public Rigidbody2D _rb;
+    [SerializeField] private float _speed = 5f;
+    [SerializeField] private Rigidbody2D _rb;
 
     // initialize with direction
     public void Init(Vector2 dir)
@@ -20,11 +20,11 @@ public class Projectile : MonoBehaviour
         // impact effect
         //Instantiate(impactEffect, transform.position, Quaternion.identity);
 
-        /* some effect on player
+        // some effect on player
         if (collision.tag == "Player")
         {
-            collision.transform.GetComponent<Player>.effect();
-        }*/
+            collision.GetComponent<Health>().takeDamage(1);
+        }
 
         if (collision.tag != "Enemy")
         {
