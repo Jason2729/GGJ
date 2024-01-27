@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class EnemyControl : MonoBehaviour
 {
+    public float enemySpeed = 2.0f;
     // Start is called before the first frame update
     void Start()
     {
@@ -11,8 +12,25 @@ public class EnemyControl : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
+        if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
+        {
+            transform.Translate(0, enemySpeed * Time.deltaTime, 0);
+        }
+        else if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow))
+        {
+            transform.Translate(0, -enemySpeed * Time.deltaTime, 0);
+        }
+        else if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
+        {
+            transform.Translate(-enemySpeed * Time.deltaTime, 0, 0);
+        }
+        else if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
+        {
+            transform.Translate(enemySpeed * Time.deltaTime, 0, 0);
+        }
         
+
     }
 }
