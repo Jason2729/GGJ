@@ -25,10 +25,11 @@ public class Projectile : MonoBehaviour
         {
             collision.transform.GetComponent<Player>.effect();
         }*/
-         
-        // destroy projectile
-        Destroy(gameObject);
-        
-            
+
+        if (collision.tag != "Enemy")
+        {
+            // destroy projectile
+            Destroy(gameObject);
+        }           
     }
 }

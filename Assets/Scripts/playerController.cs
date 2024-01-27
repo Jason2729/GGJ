@@ -38,9 +38,5 @@ public class PlayerController : MonoBehaviour
         {
             transform.Translate(playerSpeed * Time.deltaTime, 0, 0);
         }
-        else if (Input.GetKey(KeyCode.Space))
-        {
-            transform.Translate(0, playerSpeed * 10 * Time.deltaTime,0);
-        }
     }
 }

@@ -17,6 +17,8 @@ public class Turret : MonoBehaviour
     }
     void Start()
     {
+        //Start the tracking 
+        StartCoroutine(trackingCoroutine());
         //Start the attack 
         StartCoroutine(attackCoroutine());
     }
@@ -32,11 +34,16 @@ public class Turret : MonoBehaviour
         }
     }
 
-    void FixedUpdate()
+    private IEnumerator trackingCoroutine()
     {
-        // rotate to target position
-        var targetPosition =  _cam.ScreenToWorldPoint(_target.transform.position);
-        targetPosition.z = 0;
-        transform.up = Vector3.MoveTowards(transform.up, targetPosition, _rotationSpeed * Time.deltaTime);        
+        while (true)
+        {
+            // find target
+            var targetPosition = _cam.ScreenToWorldPoint(_target.transform.position);
+            targetPosition.z = 0;
+            // rotate to target position
+            transform.up = Vector3.MoveTowards(transform.up, targetPosition, _rotationSpeed * Time.deltaTime);
+        }
+                 
     }
 }
