@@ -11,6 +11,7 @@ public class Projectile1 : MonoBehaviour
 {
     [SerializeField] private float _speed = 5f;
     [SerializeField] private Rigidbody2D _rb;
+    [SerializeField] private GameObject explosionEffect;
 
     // initialize with direction
     public void Init(Vector2 dir)
@@ -18,23 +19,19 @@ public class Projectile1 : MonoBehaviour
         _rb = GetComponent<Rigidbody2D>();
         // set velocity of projectile
         _rb.velocity = dir * _speed;
+
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         // impact effect
-        //Instantiate(impactEffect, transform.position, Quaternion.identity);
-
+        Instantiate(explosionEffect, transform.position, Quaternion.identity);
         // some effect on player
         if (collision.tag == "Player")
         {
             collision.GetComponent<BasicPlatformer>().Slow(1);
         }
-
-        if (collision.tag != "Enemy")
-        {
-            // destroy projectile
-            Destroy(gameObject);
-        }           
+        // destroy projectile
+        Destroy(gameObject);
     }
 }

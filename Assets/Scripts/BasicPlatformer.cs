@@ -32,6 +32,11 @@ public class BasicPlatformer : MonoBehaviour
     private bool isGrounded = false;
     private bool canWallJump = false;
 
+    [SerializeField] 
+    private AudioSource audioSource;
+    [SerializeField] 
+    private AudioClip jumpAudioClip;
+
     Vector2 playerVelocity = new Vector2(0, 0);
 
     private BoxCollider2D boxCollider2D;
@@ -50,6 +55,7 @@ public class BasicPlatformer : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        audioSource = GetComponent<AudioSource>();
         playerRigidBody = GetComponent<Rigidbody2D>();
         boxCollider2D = GetComponent<BoxCollider2D>();
     }
@@ -84,6 +90,7 @@ public class BasicPlatformer : MonoBehaviour
 
             if (isGrounded && Input.GetKeyDown(KeyCode.Space))
             {
+                audioSource.PlayOneShot(jumpAudioClip);
                 isGrounded = false;
                 playerVelocity.y = jumpForce;
             }
@@ -105,7 +112,7 @@ public class BasicPlatformer : MonoBehaviour
                     ColliderDistance2D colliderDistance = overlappingColliders[i].Distance(boxCollider2D);
                     transform.Translate(colliderDistance.pointA - colliderDistance.pointB);
 
-                    Debug.Log("Move to : " + (colliderDistance.pointA - colliderDistance.pointB) + " Velocity of Player " + playerVelocity + " Time.deltatime " + Time.deltaTime);
+                    //Debug.Log("Move to : " + (colliderDistance.pointA - colliderDistance.pointB) + " Velocity of Player " + playerVelocity + " Time.deltatime " + Time.deltaTime);
 
                     //Alright change this this method sucks for telling what direction it came from
                     if (Vector2.Angle(colliderDistance.normal, Vector2.up) < 90)

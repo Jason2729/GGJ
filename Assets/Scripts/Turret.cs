@@ -14,6 +14,10 @@ public class Turret : MonoBehaviour
     [SerializeField] private Projectile _projectilePrefab;
     [SerializeField] private Projectile1 _projectilePrefab1;
     [SerializeField] private Transform _spawnPoint;
+
+    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private AudioClip shootAudioClip;
+
     private Transform _target;
 
     void Awake()
@@ -24,6 +28,7 @@ public class Turret : MonoBehaviour
 
     void Start()
     {
+        audioSource = GetComponent<AudioSource>();
         //Start the attack 
         StartCoroutine(attackCoroutine());
     }
@@ -35,6 +40,7 @@ public class Turret : MonoBehaviour
             // attack at interval
             yield return new WaitForSeconds(3);
             // spawn random projectile
+            audioSource.PlayOneShot(shootAudioClip);
             if (Random.Range(1, 3) == 1)
             {
                 Instantiate(_projectilePrefab, _spawnPoint.position, Quaternion.identity).Init(transform.up);// where to spawn projectile
@@ -54,6 +60,7 @@ public class Turret : MonoBehaviour
         {
             var targetPosition = _target.transform.position;
             targetPosition.z = 0;
+            targetPosition.y += 1;  // correcting a little
             // rotate to target position
             transform.up = Vector3.MoveTowards(transform.up, targetPosition, _rotationSpeed * Time.deltaTime);
         }
