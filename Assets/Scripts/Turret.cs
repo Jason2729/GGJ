@@ -22,7 +22,7 @@ public class Turret : MonoBehaviour
         while (_target != null)    //continuously attack target
         {
             // attack at interval
-            yield return new WaitForSeconds(1);
+            yield return new WaitForSeconds(4);
             // spawn random projectile
             if (Random.Range(1, 3) == 1)
             {
