@@ -152,9 +152,12 @@ MonoBehaviour:
   speedAccel: 77
   frictionForce: 34
   coyoteTimeMax: 0.2
+  coyoteWallTimeMax: 0.2
   jumpForce: 5.5
+  wallJumpForce: 8
   jetPackMax: 0.45
   isGrounded: 0
+  isWallJump: 0
   audioSource: {fileID: 4817652245028867799}
   jumpAudioClip: {fileID: 8300000, guid: 106523b4cefa595438ccae6a6ef589d9, type: 3}
 --- !u!114 &5618916689669525964

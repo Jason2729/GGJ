@@ -909,6 +909,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 8923425616093776838, guid: e700c6e06dbb50f4e973b1cb6234554f, type: 3}
+      propertyPath: justWallJumpedMax
+      value: 0.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

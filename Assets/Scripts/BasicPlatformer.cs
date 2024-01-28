@@ -10,6 +10,7 @@ using UnityEngine;
 //ADD A LITTLE attack for the player
 public class BasicPlatformer : MonoBehaviour
 {
+    public static BasicPlatformer Instance;
     [SerializeField]
     float terminalVelocity = -9.8f;
     [SerializeField]
@@ -24,7 +25,17 @@ public class BasicPlatformer : MonoBehaviour
     float coyoteTimeMax = 0.2f;
     float coyoteTime;
     [SerializeField]
-    float jumpForce = 8;
+    float coyoteWallTimeMax = 0.2f;
+    float coyoteWallTime;
+
+    [SerializeField]
+    float justWallJumpedMax = 0.1f;
+    float justWallJumped;
+
+    [SerializeField]
+    float jumpForce = 5.5f;
+    [SerializeField]
+    float wallJumpForce = 8;
     [SerializeField]
     float jetPackMax = 0.1f;
     float jetPack;
@@ -32,7 +43,8 @@ public class BasicPlatformer : MonoBehaviour
 
     [SerializeField]
     private bool isGrounded = false;
-    private bool canWallJump = false;
+    [SerializeField]
+    private bool isWallJump = false;
 
     [SerializeField] 
     private AudioSource audioSource;
@@ -40,6 +52,10 @@ public class BasicPlatformer : MonoBehaviour
     private AudioClip jumpAudioClip;
 
     Vector2 playerVelocity = new Vector2(0, 0);
+
+    float lastWallX = 1f;
+
+    Vector2 fourtyFiveDegree = new Vector2(0.7071f, 0.7071f);
 
     private BoxCollider2D boxCollider2D;
 
@@ -57,24 +73,37 @@ public class BasicPlatformer : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Instance = this;
         audioSource = GetComponent<AudioSource>();
         playerRigidBody = GetComponent<Rigidbody2D>();
         boxCollider2D = GetComponent<BoxCollider2D>();
     }
 
+    public void UpdateWithCard(CardDataScriptableObject cardDataScriptableObject)
+    {
+        maxSpeed *= cardDataScriptableObject.moveSpeedModifier;
+        speedAccel *= cardDataScriptableObject.moveSpeedModifier;
+
+        jumpForce *= cardDataScriptableObject.jumpHeightModifier;
+        wallJumpForce *= cardDataScriptableObject.jumpHeightModifier;
+    }
+
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         //The classic frame chucking technique when it gets to laggy just dont calculate anything
         //Prevents the player from falling through the floor
         if (Time.deltaTime < 0.1f)
         {
-            coyoteTime -= Time.deltaTime;
-            if (coyoteTime < 0)
-            {
-                isGrounded = false;
-            }
 
+            if (coyoteTime < 0) {isGrounded = false;}
+            else {coyoteTime -= Time.deltaTime;}
+
+            if (coyoteWallTime < 0) {isWallJump = false; }
+            else { coyoteWallTime -= Time.deltaTime; }
+
+            if (justWallJumped > 0) { justWallJumped -= Time.deltaTime; }
+            
             //"Friction" Equations
             if ((Input.GetAxis("Horizontal") > 0 || isGrounded) && playerVelocity.x < 0)
             {
@@ -96,6 +125,15 @@ public class BasicPlatformer : MonoBehaviour
                 isGrounded = false;
                 playerVelocity.y = jumpForce;
             }
+            else if (isWallJump && Input.GetKeyDown(KeyCode.Space))
+            {
+                justWallJumped = justWallJumpedMax;
+                audioSource.PlayOneShot(jumpAudioClip);
+                isWallJump = false;
+                fourtyFiveDegree.x = lastWallX < 0 ? Mathf.Abs(fourtyFiveDegree.x) * -1 : Mathf.Abs(fourtyFiveDegree.x);
+                
+                playerVelocity = fourtyFiveDegree * wallJumpForce;
+            }
             //Add player extra jump height capibilities && Gravity
             if (Input.GetKey(KeyCode.Space) && jetPack > 0 && playerVelocity.y > 0)
             {
@@ -106,6 +144,7 @@ public class BasicPlatformer : MonoBehaviour
                 playerVelocity.y = Mathf.Max(playerVelocity.y + gravity * Time.deltaTime, terminalVelocity);
             }
 
+            Debug.Log(playerVelocity);
             //Move player
             MoveObject(playerVelocity);
 
@@ -116,8 +155,6 @@ public class BasicPlatformer : MonoBehaviour
                 {
 
                     ColliderDistance2D colliderDistance = overlappingColliders[i].Distance(boxCollider2D);
-                    Debug.Log(Vector2.Angle(colliderDistance.normal, Vector2.up));
-                    Debug.Log(colliderDistance.normal);
                     transform.Translate(colliderDistance.pointA - colliderDistance.pointB);
 
                     //Alright change this this method sucks for telling what direction it came from
@@ -132,11 +169,15 @@ public class BasicPlatformer : MonoBehaviour
                         playerVelocity.y = 0;
                     }
 
-                    if (Vector2.Angle(colliderDistance.normal, Vector2.up) >= 85)
+                    if (Vector2.Angle(colliderDistance.normal, Vector2.up) >= 85 && Vector2.Angle(colliderDistance.normal, Vector2.up) < 180)
                     {
-                        //Debug.Log(Vector2.Angle(colliderDistance.normal, Vector2.up) + " Stopping Horizontal " + (colliderDistance.pointA - colliderDistance.pointB));
-                        playerVelocity.x = 0;
-                        canWallJump = true;
+                        lastWallX = colliderDistance.normal.x;
+                        coyoteWallTime = coyoteWallTimeMax;
+
+                        if (justWallJumped <= 0)
+                            { playerVelocity.x = 0; }
+
+                        isWallJump = true;
                     }
                 }
             }
