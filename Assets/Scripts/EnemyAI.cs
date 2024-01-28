@@ -10,7 +10,7 @@ using static UnityEngine.GraphicsBuffer;
 
 public class EnemyAI : MonoBehaviour
 {
-    [SerializeField] private float _speed = 3f;
+    [SerializeField] private float _speed = 2f;
     [SerializeField] private float _rotationSpeed = 3f;
 
     private Transform _target;

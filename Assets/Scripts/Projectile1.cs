@@ -28,7 +28,7 @@ public class Projectile1 : MonoBehaviour
         // some effect on player
         if (collision.tag == "Player")
         {
-            collision.GetComponent<PlayerController>().Slow(1);
+            collision.GetComponent<BasicPlatformer>().Slow(1);
         }
 
         if (collision.tag != "Enemy")

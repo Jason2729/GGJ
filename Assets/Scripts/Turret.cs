@@ -14,7 +14,13 @@ public class Turret : MonoBehaviour
     [SerializeField] private Projectile _projectilePrefab;
     [SerializeField] private Projectile1 _projectilePrefab1;
     [SerializeField] private Transform _spawnPoint;
-    [SerializeField] private GameObject _target;
+    private Transform _target;
+
+    void Awake()
+    {
+        //Find player 
+        _target = FindObjectOfType<PlayerController>().transform;
+    }
 
     void Start()
     {
@@ -27,7 +33,7 @@ public class Turret : MonoBehaviour
         while (_target != null)    //continuously attack target
         {
             // attack at interval
-            yield return new WaitForSeconds(4);
+            yield return new WaitForSeconds(3);
             // spawn random projectile
             if (Random.Range(1, 3) == 1)
             {

@@ -129,5 +129,23 @@ public class BasicPlatformer : MonoBehaviour
             }
         }
     }
+
+    // Slowing function (from projectile1)
+    public void Slow(int val)
+    {
+        Debug.Log("player slowed!");
+        StartCoroutine(slowCoroutine(val));
+    }
+
+    private IEnumerator slowCoroutine(int val)
+    {
+        // reduce player speed
+        maxSpeed -= val;
+        // wait for some interval
+        yield return new WaitForSeconds(5);
+        // restore speed
+        Debug.Log("player un-slowed!");
+        maxSpeed += val;
+    }
 }
 
