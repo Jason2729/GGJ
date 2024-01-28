@@ -631,6 +631,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gamePaused: 0
   pauseMenu: {fileID: 1459187}
+  balloons: 0
+  balloonText: {fileID: 1397799512}
 --- !u!1 &252689766
 GameObject:
   m_ObjectHideFlags: 0
