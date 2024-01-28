@@ -37,7 +37,7 @@ public class Turret : MonoBehaviour
     private IEnumerator attackCoroutine()
     {
         // Some range of awareness
-        while (_target != null && (Mathf.Abs(_target.position.x - transform.position.x) < awareness && Mathf.Abs(_target.position.y - transform.position.y) < awareness))    //continuously attack target
+        while (_target != null)    //continuously attack target
         {
             // attack at interval
             yield return new WaitForSeconds(3);
