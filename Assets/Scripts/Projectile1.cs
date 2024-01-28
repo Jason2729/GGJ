@@ -1,3 +1,8 @@
+/*
+ * Tutorial Used: Point and Shoot / Turret Tutorial - Unity 
+ * https://youtu.be/OEJIViea3b0?si=iy07WpX9_xebN0EV
+ */
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
