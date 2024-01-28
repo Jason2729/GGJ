@@ -23,10 +23,12 @@ public class BasicPlatformer : MonoBehaviour
     [SerializeField]
     float coyoteTimeMax = 0.2f;
     float coyoteTime;
-    //[SerializeField]
-    //float friction = 9;
     [SerializeField]
     float jumpForce = 8;
+    [SerializeField]
+    float jetPackMax = 0.1f;
+    float jetPack;
+
 
     [SerializeField]
     private bool isGrounded = false;
@@ -74,12 +76,12 @@ public class BasicPlatformer : MonoBehaviour
             }
 
             //"Friction" Equations
-            if (Input.GetAxis("Horizontal") >= 0 && playerVelocity.x < 0)
+            if ((Input.GetAxis("Horizontal") > 0 || isGrounded) && playerVelocity.x < 0)
             {
                 playerVelocity.x = Mathf.Min(playerVelocity.x + frictionForce * Time.deltaTime, 0);
             }
 
-            if (Input.GetAxis("Horizontal") <= 0 && playerVelocity.x > 0)
+            if ((Input.GetAxis("Horizontal") < 0 || isGrounded) && playerVelocity.x > 0)
             {
                 playerVelocity.x = Mathf.Max(playerVelocity.x - frictionForce * Time.deltaTime, 0);
             }
@@ -94,8 +96,12 @@ public class BasicPlatformer : MonoBehaviour
                 isGrounded = false;
                 playerVelocity.y = jumpForce;
             }
-            //Gravity
-            if (!Input.GetKeyDown(KeyCode.Space))
+            //Add player extra jump height capibilities && Gravity
+            if (Input.GetKey(KeyCode.Space) && jetPack > 0 && playerVelocity.y > 0)
+            {
+                jetPack -= Time.deltaTime;
+            }
+            else
             {
                 playerVelocity.y = Mathf.Max(playerVelocity.y + gravity * Time.deltaTime, terminalVelocity);
             }
@@ -110,23 +116,23 @@ public class BasicPlatformer : MonoBehaviour
                 {
 
                     ColliderDistance2D colliderDistance = overlappingColliders[i].Distance(boxCollider2D);
+                    Debug.Log(Vector2.Angle(colliderDistance.normal, Vector2.up));
+                    Debug.Log(colliderDistance.normal);
                     transform.Translate(colliderDistance.pointA - colliderDistance.pointB);
 
-                    //Debug.Log("Move to : " + (colliderDistance.pointA - colliderDistance.pointB) + " Velocity of Player " + playerVelocity + " Time.deltatime " + Time.deltaTime);
-
                     //Alright change this this method sucks for telling what direction it came from
-                    if (Vector2.Angle(colliderDistance.normal, Vector2.up) < 90)
-                    {
-                        //Debug.Log(colliderDistance.normal + " " + Vector2.Angle(colliderDistance.normal, Vector2.up) + " Stopping Vertical " + (colliderDistance.pointA - colliderDistance.pointB));
+                    if (Vector2.Angle(colliderDistance.normal, Vector2.up) < 85)
+                    { 
                         if (playerVelocity.y < 0)
                         {
                             coyoteTime = coyoteTimeMax;
+                            jetPack = jetPackMax;
                             isGrounded = true;
                         }
                         playerVelocity.y = 0;
                     }
 
-                    if (Vector2.Angle(colliderDistance.normal, Vector2.up) >= 90)
+                    if (Vector2.Angle(colliderDistance.normal, Vector2.up) >= 85)
                     {
                         //Debug.Log(Vector2.Angle(colliderDistance.normal, Vector2.up) + " Stopping Horizontal " + (colliderDistance.pointA - colliderDistance.pointB));
                         playerVelocity.x = 0;
