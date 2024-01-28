@@ -25,7 +25,10 @@ public class Projectile : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         // impact effect
-        Instantiate(explosionEffect, transform.position, Quaternion.identity);
+        if (collision.tag != "Wall")
+        {
+            Instantiate(explosionEffect, transform.position, Quaternion.identity);
+        }
         // some effect on player
         if (collision.tag == "Player")
         {

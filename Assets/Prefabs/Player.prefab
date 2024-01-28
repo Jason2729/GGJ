@@ -148,7 +148,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   terminalVelocity: -9.8
   gravity: -9.8
-  maxSpeed: 2
+  maxSpeed: 5
   speedAccel: 9
   frictionForce: 20
   coyoteTimeMax: 0.2
@@ -185,7 +185,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerSpeed: 5
   playerAnimator: {fileID: 0}
-  audioSource: {fileID: 0}
 --- !u!82 &4817652245028867799
 AudioSource:
   m_ObjectHideFlags: 0
