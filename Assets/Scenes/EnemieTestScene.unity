@@ -399,7 +399,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9147902483373109676, guid: 4df76da1c4347e643bd9e74b887e5551, type: 3}
       propertyPath: awareness
-      value: 2
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -460,7 +460,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8817523743507223417, guid: 21cc91d9940ffd14a8ba339954416db2, type: 3}
       propertyPath: awareness
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
