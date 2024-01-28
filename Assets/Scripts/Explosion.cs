@@ -7,6 +7,7 @@ public class Explosion : MonoBehaviour
 {
     [SerializeField] private AudioSource audioSource;
     [SerializeField] private AudioClip explosionAudioClip;
+    //[SerializeField] private Animation animator;
 
     // Start is called before the first frame update
     void Start()
@@ -19,6 +20,8 @@ public class Explosion : MonoBehaviour
 
     private IEnumerator explodeEffect()
     {
+        // Animation
+        //animator.Play("explosion");
         // Sound
         audioSource.PlayOneShot(explosionAudioClip);
         // Wait for audio

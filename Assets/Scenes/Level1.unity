@@ -415,7 +415,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 85eb9b31ff02e54408953c594a376228, type: 2}
+  - {fileID: 2100000, guid: 6e0def40743f5a049a1ee37e26242d71, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -859,7 +859,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 34797089fae35ac4987db6d89f82e101, type: 2}
+  - {fileID: 2100000, guid: 6e0def40743f5a049a1ee37e26242d71, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1589,7 +1589,7 @@ GameObject:
   - component: {fileID: 600960160}
   - component: {fileID: 600960161}
   m_Layer: 0
-  m_Name: PressurePlateDoor
+  m_Name: SwitchPlateDoor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2428,7 +2428,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1811144857}
         m_TargetAssemblyTypeName: CustomCardGenerator, Assembly-CSharp
         m_MethodName: RerollCards
         m_Mode: 3
@@ -2750,7 +2750,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 844445792}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6aa3846eb91248347b8ca4d0116d4a92, type: 3}
+  m_Script: {fileID: 11500000, guid: 06ad7a594a7ab224db7170e4231413ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   mainCamera: {fileID: 844445794}
@@ -43488,7 +43488,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1811144857}
         m_TargetAssemblyTypeName: CustomCardGenerator, Assembly-CSharp
         m_MethodName: GenerateCards
         m_Mode: 3
@@ -44662,7 +44662,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 34797089fae35ac4987db6d89f82e101, type: 2}
+  - {fileID: 2100000, guid: 6e0def40743f5a049a1ee37e26242d71, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -44859,7 +44859,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1448728130
 RectTransform:
   m_ObjectHideFlags: 0
@@ -44923,7 +44923,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1448728132}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1811144856}
+        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
+        m_MethodName: OpenCardGenerateUI
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1448728132
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -45656,7 +45668,10 @@ MonoBehaviour:
   frictionForce: 20
   coyoteTimeMax: 0.2
   jumpForce: 10
+  jetPackMax: 0.1
   isGrounded: 0
+  audioSource: {fileID: 0}
+  jumpAudioClip: {fileID: 0}
 --- !u!61 &1714041622
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -45903,8 +45918,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gamePaused: 0
   pauseMenu: {fileID: 407730239}
-  balloons: 0
-  balloonText: {fileID: 248412247}
+  cardGenerationCanvas: {fileID: 710504584}
 --- !u!114 &1811144857
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -45923,7 +45937,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: cfceeefaf409cab478de0ed5389d4080, type: 2}
   - {fileID: 11400000, guid: 6ccc7d078e0a55a49bc704743b77a924, type: 2}
   - {fileID: 11400000, guid: e2a9a9a14e8b9614b97043cade6c49f6, type: 2}
-  CustomCardHolder: {fileID: 0}
+  CustomCardHolder: {fileID: 691768897}
   customCardPrefab: {fileID: 8451402592132203557, guid: 6d129f60463b9724cbe85cbda4b7d16d, type: 3}
   maxCards: 5
   isClearingCards: 0
@@ -46212,7 +46226,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 85eb9b31ff02e54408953c594a376228, type: 2}
+  - {fileID: 2100000, guid: 6e0def40743f5a049a1ee37e26242d71, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

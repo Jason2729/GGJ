@@ -254,7 +254,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1179250858373219806}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 9110172491174775896}
+        m_TargetAssemblyTypeName: CustomCard, Assembly-CSharp
+        m_MethodName: OnSelectCard
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &4018996178643051368
 GameObject:
   m_ObjectHideFlags: 0
@@ -653,21 +665,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cardNameText: {fileID: 3847290204681181508}
   cardDescriptionText: {fileID: 8860710010196532534}
-  moveSpeedModifier: 1
-  jumpHeightModifier: 1
-  sizeModifier: 1
-  healthModifier: 1
-  gravityModifier: 1
-  damageDealtModifier: 1
-  damageTakenModifier: 1
-  weaponBaseDamage: 5
-  weaponBaseRange: 2
-  weaponSizeModifier: 1
-  weaponArcModifier: 1
-  attackCooldownModifier: 1
-  balloonsGained: 0
+  cardData: {fileID: 0}
   cardName: Card Name
   cardDescription: Description
+  OnHovered:
+    m_PersistentCalls:
+      m_Calls: []
+  OnHoverStopped:
+    m_PersistentCalls:
+      m_Calls: []
+  OnSelected:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &938247999307588071
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -703,7 +712,7 @@ MonoBehaviour:
         m_Calls:
         - m_Target: {fileID: 9110172491174775896}
           m_TargetAssemblyTypeName: CustomCard, Assembly-CSharp
-          m_MethodName: OnResetCard
+          m_MethodName: OnStopHover
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}

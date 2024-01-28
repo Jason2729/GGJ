@@ -38,6 +38,9 @@ public class EnemyAI : MonoBehaviour
     public void Die()
     {
         Debug.Log("enemy died!");
+        // Create card
+        UIManager.Instance.OpenCardGenerateUI();
+        // Destroy enemys
         Destroy(gameObject);
     }
 }
