@@ -19,7 +19,16 @@ public class Projectile1 : MonoBehaviour
         _rb = GetComponent<Rigidbody2D>();
         // set velocity of projectile
         _rb.velocity = dir * _speed;
+        StartCoroutine(timedDestroy());   // destroy projectile after some time
+    }
 
+    private IEnumerator timedDestroy()
+    {
+        yield return new WaitForSeconds(10);
+        // impact effect
+        Instantiate(explosionEffect, transform.position, Quaternion.identity);
+        // destroy projectile
+        Destroy(gameObject);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

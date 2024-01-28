@@ -12,7 +12,7 @@ public class EnemyAI : MonoBehaviour
 {
     [SerializeField] private float _speed = 2f;
     [SerializeField] private float _rotationSpeed = 3f;
-    [SerializeField, Range(0,11)] private float awareness = 5f;
+    [SerializeField, Range(0,11)] private float awareness = 3f;
 
     private Transform _target;
 
@@ -25,7 +25,7 @@ public class EnemyAI : MonoBehaviour
     void FixedUpdate()
     {
         // Some range of awareness
-        if (Mathf.Abs(_target.position.x - transform.position.x) < awareness || Mathf.Abs(_target.position.y - transform.position.y) < awareness)
+        if (Mathf.Abs(_target.position.x - transform.position.x) < awareness && Mathf.Abs(_target.position.y - transform.position.y) < awareness)
         {
             // Face player
             var dir = _target.position - transform.position;

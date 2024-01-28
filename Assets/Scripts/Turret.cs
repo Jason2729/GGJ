@@ -14,6 +14,7 @@ public class Turret : MonoBehaviour
     [SerializeField] private Projectile _projectilePrefab;
     [SerializeField] private Projectile1 _projectilePrefab1;
     [SerializeField] private Transform _spawnPoint;
+    [SerializeField, Range(0, 11)] private float awareness = 5f;
 
     [SerializeField] private AudioSource audioSource;
     [SerializeField] private AudioClip shootAudioClip;
@@ -35,6 +36,7 @@ public class Turret : MonoBehaviour
 
     private IEnumerator attackCoroutine()
     {
+        // Some range of awareness
         while (_target != null)    //continuously attack target
         {
             // attack at interval
@@ -56,7 +58,7 @@ public class Turret : MonoBehaviour
     void FixedUpdate()
     {
         // find target
-        if (_target != null)
+        if (_target != null && (Mathf.Abs(_target.position.x - transform.position.x) < awareness && Mathf.Abs(_target.position.y - transform.position.y) < awareness))
         {
             var targetPosition = _target.transform.position;
             targetPosition.z = 0;
