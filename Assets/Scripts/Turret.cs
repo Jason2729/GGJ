@@ -1,3 +1,8 @@
+/*
+ * Tutorial Used: Point and Shoot / Turret Tutorial - Unity 
+ * https://youtu.be/OEJIViea3b0?si=iy07WpX9_xebN0EV
+ */
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,8 +11,8 @@ using static UnityEngine.GraphicsBuffer;
 public class Turret : MonoBehaviour
 {
     [SerializeField, Range(1,100)]private float _rotationSpeed = 10f;
-    [SerializeField] private Projectile _projectilePrefab1;
-    [SerializeField] private Pie _projectilePrefab2;
+    [SerializeField] private Projectile _projectilePrefab;
+    [SerializeField] private Projectile1 _projectilePrefab1;
     [SerializeField] private Transform _spawnPoint;
     [SerializeField] private GameObject _target;
 
@@ -26,11 +31,11 @@ public class Turret : MonoBehaviour
             // spawn random projectile
             if (Random.Range(1, 3) == 1)
             {
-                Instantiate(_projectilePrefab1, _spawnPoint.position, Quaternion.identity).Init(transform.up);// where to spawn projectile
+                Instantiate(_projectilePrefab, _spawnPoint.position, Quaternion.identity).Init(transform.up);// where to spawn projectile
             }
             else
             {
-                Instantiate(_projectilePrefab2, _spawnPoint.position, Quaternion.identity).Init(transform.up);// where to spawn projectile
+                Instantiate(_projectilePrefab1, _spawnPoint.position, Quaternion.identity).Init(transform.up);// where to spawn projectile
             }
             
         }

@@ -1,8 +1,13 @@
+/*
+ * Tutorial Used: Point and Shoot / Turret Tutorial - Unity 
+ * https://youtu.be/OEJIViea3b0?si=iy07WpX9_xebN0EV
+ */
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Pie : MonoBehaviour
+public class Projectile1 : MonoBehaviour
 {
     [SerializeField] private float _speed = 5f;
     [SerializeField] private Rigidbody2D _rb;

@@ -1,3 +1,8 @@
+/*
+ * Tutorial Used: 2D follow AI with Unity - [Tutorial]
+ * https://youtu.be/jlklOd8PEQE?si=uwTTbTJMIwchIx7r
+ */
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
