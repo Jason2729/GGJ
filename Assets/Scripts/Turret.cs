@@ -6,7 +6,8 @@ using static UnityEngine.GraphicsBuffer;
 public class Turret : MonoBehaviour
 {
     [SerializeField, Range(1,100)]private float _rotationSpeed = 10f;
-    [SerializeField] private Projectile _projectilePrefab;
+    [SerializeField] private Projectile _projectilePrefab1;
+    [SerializeField] private Pie _projectilePrefab2;
     [SerializeField] private Transform _spawnPoint;
     [SerializeField] private GameObject _target;
 
@@ -22,8 +23,16 @@ public class Turret : MonoBehaviour
         {
             // attack at interval
             yield return new WaitForSeconds(1);
-            // spawn projectile
-            Instantiate(_projectilePrefab, _spawnPoint.position, Quaternion.identity).Init(transform.up);// where to spawn projectile
+            // spawn random projectile
+            if (Random.Range(1, 3) == 1)
+            {
+                Instantiate(_projectilePrefab1, _spawnPoint.position, Quaternion.identity).Init(transform.up);// where to spawn projectile
+            }
+            else
+            {
+                Instantiate(_projectilePrefab2, _spawnPoint.position, Quaternion.identity).Init(transform.up);// where to spawn projectile
+            }
+            
         }
     }
 

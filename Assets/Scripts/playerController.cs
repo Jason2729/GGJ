@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Unity.Properties;
 using UnityEngine;
 using UnityEngine.UIElements;
+using static UnityEngine.GraphicsBuffer;
 
 public class PlayerController : MonoBehaviour
 {
@@ -44,5 +45,22 @@ public class PlayerController : MonoBehaviour
     {
         Debug.Log("player died!");
         Destroy(gameObject);
+    }
+
+    public void Slow(int val)
+    {
+        Debug.Log("player pied!");
+        StartCoroutine(slowCoroutine(val));
+    }
+
+    private IEnumerator slowCoroutine(int val)
+    {
+        // reduce player speed
+        playerSpeed -= val;
+        // wait for some interval
+        yield return new WaitForSeconds(5);
+        // restore speed
+        Debug.Log("player un-pied!");
+        playerSpeed += val;
     }
 }

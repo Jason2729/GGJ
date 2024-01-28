@@ -833,7 +833,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
-  m_Color: {r: 1, g: 0, b: 0, a: 1}
+  m_Color: {r: 1, g: 0, b: 0.8295088, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -1028,6 +1028,10 @@ PrefabInstance:
       propertyPath: _target
       value: 
       objectReference: {fileID: 7841367277071536756}
+    - target: {fileID: 5382917646220891422, guid: 4df76da1c4347e643bd9e74b887e5551, type: 3}
+      propertyPath: _projectilePrefab1
+      value: 
+      objectReference: {fileID: 5349279521926361715, guid: 250e1f170ff84f249bca0487a1f98b94, type: 3}
     - target: {fileID: 7591884798688688092, guid: 4df76da1c4347e643bd9e74b887e5551, type: 3}
       propertyPath: m_Name
       value: Turret
