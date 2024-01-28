@@ -24,7 +24,7 @@ public class CustomCardGenerator : MonoBehaviour
     {
         int id = Random.Range(0, CardData.Count);
         GameObject customCard = Instantiate(customCardPrefab, CustomCardHolder);
-        customCard.GetComponent<CustomCard>().FillOutCard(CardData[id]);
+        customCard.GetComponent<CustomCard>().LinkCardData(CardData[id]);
         return customCard;
     }
 
