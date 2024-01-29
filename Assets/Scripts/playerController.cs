@@ -33,13 +33,4 @@ public class PlayerController : MonoBehaviour
         //Destroy(gameObject);
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        Debug.Log("Attack 100 damage!");
-        if (Input.GetKey(KeyCode.B) && collision.tag == "Enemy" && collision.GetComponent<EnemyAI>() != false)
-        {
-            //collision.GetComponent<Health>().takeDamage(100);
-            collision.GetComponent<EnemyAI>().Die();
-        }
-    }
 }
