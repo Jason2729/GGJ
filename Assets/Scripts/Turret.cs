@@ -14,7 +14,7 @@ public class Turret : MonoBehaviour
     [SerializeField] private Projectile _projectilePrefab;
     [SerializeField] private Projectile1 _projectilePrefab1;
     [SerializeField] private Transform _spawnPoint;
-    [SerializeField, Range(0, 11)] private float awareness = 5f;
+    [SerializeField, Range(0, 11)] private float awareness = 10f;
 
     [SerializeField] private AudioSource audioSource;
     [SerializeField] private AudioClip shootAudioClip;
@@ -42,16 +42,18 @@ public class Turret : MonoBehaviour
             // attack at interval
             yield return new WaitForSeconds(3);
             // spawn random projectile
-            audioSource.PlayOneShot(shootAudioClip);
-            if (Random.Range(1, 3) == 1)
+            if (Mathf.Abs(_target.position.x - transform.position.x) < awareness && Mathf.Abs(_target.position.y - transform.position.y) < awareness)
             {
-                Instantiate(_projectilePrefab, _spawnPoint.position, Quaternion.identity).Init(transform.up);// where to spawn projectile
-            }
-            else
-            {
-                Instantiate(_projectilePrefab1, _spawnPoint.position, Quaternion.identity).Init(transform.up);// where to spawn projectile
-            }
-            
+                audioSource.PlayOneShot(shootAudioClip);
+                if (Random.Range(1, 3) == 1)
+                {
+                    Instantiate(_projectilePrefab, _spawnPoint.position, Quaternion.identity).Init(transform.up);// where to spawn projectile
+                }
+                else
+                {
+                    Instantiate(_projectilePrefab1, _spawnPoint.position, Quaternion.identity).Init(transform.up);// where to spawn projectile
+                }
+            } 
         }
     }
 
@@ -60,11 +62,11 @@ public class Turret : MonoBehaviour
         // find target
         if (_target != null && (Mathf.Abs(_target.position.x - transform.position.x) < awareness && Mathf.Abs(_target.position.y - transform.position.y) < awareness))
         {
-            var targetPosition = _target.transform.position;
+            var targetPosition = _target.position;
             targetPosition.z = 0;
             targetPosition.y += 1;  // correcting a little
             // rotate to target position
-            transform.up = Vector3.MoveTowards(transform.up, targetPosition, _rotationSpeed * Time.deltaTime);
+            transform.up = _target.position - transform.position;  
         }
     }
 }

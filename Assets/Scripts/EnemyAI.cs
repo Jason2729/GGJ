@@ -12,7 +12,7 @@ public class EnemyAI : MonoBehaviour
 {
     [SerializeField] private float _speed = 2f;
     [SerializeField] private float _rotationSpeed = 3f;
-    [SerializeField, Range(0,11)] private float awareness = 3f;
+    [SerializeField, Range(0,11)] private float awareness = 8f;
 
     private Transform _target;
 
@@ -42,5 +42,15 @@ public class EnemyAI : MonoBehaviour
         UIManager.Instance.OpenCardGenerateUI();
         // Destroy enemys
         Destroy(gameObject);
+    }
+
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        // some effect on player
+        if (collision.tag == "Player")
+        {
+            collision.GetComponent<Health>().takeDamage(1);
+        }
     }
 }
