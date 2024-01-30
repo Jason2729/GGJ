@@ -144,7 +144,7 @@ public class BasicPlatformer : MonoBehaviour
                 playerVelocity.y = Mathf.Max(playerVelocity.y + gravity * Time.deltaTime, terminalVelocity);
             }
 
-            Debug.Log(playerVelocity);
+            //Debug.Log(playerVelocity);
             //Move player
             MoveObject(playerVelocity);
 

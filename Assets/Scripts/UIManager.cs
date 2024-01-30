@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class UIManager : MonoBehaviour
@@ -9,6 +10,11 @@ public class UIManager : MonoBehaviour
     [SerializeField] private bool selectingCards = false;
     [SerializeField] private GameObject pauseMenu;
     [SerializeField] private GameObject cardGenerationCanvas;
+    [SerializeField] private CustomCardGenerator cardGenerator;
+
+    [SerializeField] private TextMeshProUGUI balloonText;
+
+    [SerializeField] private int balloons = 0;
 
     private void Start()
     {
@@ -65,7 +71,26 @@ public class UIManager : MonoBehaviour
     public void CloseCardGenerateUI()
     {
         selectingCards = false;
+        cardGenerator.ClearAllCards();
         UnpauseGame();
         cardGenerationCanvas.SetActive(false);
+    }
+
+
+    public int GetBalloons()
+    {
+        return balloons;
+    }
+
+    public void UseBalloons(int balloonsUsed)
+    {
+        balloons = (balloons >= balloonsUsed) ? balloons-balloonsUsed : balloons;
+    }
+
+    public void CollectBalloon()
+    {
+        balloons++;
+        balloonText.text = "Balloons - " + balloons.ToString();
+
     }
 }

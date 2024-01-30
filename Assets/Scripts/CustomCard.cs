@@ -38,7 +38,7 @@ public class CustomCard : MonoBehaviour
     public void OnSelectCard()
     {
         UIManager.Instance.CloseCardGenerateUI();
-        BasicPlatformer.Instance.UpdateWithCard(cardData);
+        //BasicPlatformer.Instance.UpdateWithCard(cardData);
         OnSelected?.Invoke();
     }
 

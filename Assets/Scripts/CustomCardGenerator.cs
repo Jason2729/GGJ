@@ -11,6 +11,8 @@ public class CustomCardGenerator : MonoBehaviour
     [SerializeField] private int maxCards = 5;
     [SerializeField] private bool isClearingCards = false;
 
+    [SerializeField] private int balloonsNeededForReroll = 3;
+
     public void GenerateCards(int cardsToGenerate)
     {
         int startingCards = CustomCardHolder.childCount;
@@ -37,9 +39,26 @@ public class CustomCardGenerator : MonoBehaviour
         isClearingCards = false;
     }
 
+    public void ClearAllCards()
+    {
+        for (int i = CustomCardHolder.transform.childCount-1; i >= 0; i--)
+        {
+            Destroy(CustomCardHolder.GetChild(i).gameObject);
+        }
+        isClearingCards = false;
+    }
+
     public void RerollCards(int cardsToReroll)
     {
-        StartCoroutine(Reroll(cardsToReroll));
+        if(UIManager.Instance.GetBalloons() >= balloonsNeededForReroll)
+        {
+            UIManager.Instance.UseBalloons(balloonsNeededForReroll);
+            StartCoroutine(Reroll(cardsToReroll));
+        }
+        else
+        {
+
+        }
     }
 
     private IEnumerator Reroll (int cardsToReroll)
