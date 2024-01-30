@@ -29,6 +29,9 @@ public class BasicPlatformer : MonoBehaviour
     float coyoteWallTime;
 
     [SerializeField]
+    Renderer currentRenderer;
+
+    [SerializeField]
     float justWallJumpedMax = 0.1f;
     float justWallJumped;
 
@@ -63,6 +66,8 @@ public class BasicPlatformer : MonoBehaviour
 
     private Collider2D[] overlappingColliders = new Collider2D[16];
 
+    private int randInt = 0;
+
     private void MoveObject(Vector2 moveHowMuch)
     {
         //playerRigidBody.velocity = moveHowMuch;
@@ -74,13 +79,24 @@ public class BasicPlatformer : MonoBehaviour
     void Start()
     {
         Instance = this;
+        
         audioSource = GetComponent<AudioSource>();
         playerRigidBody = GetComponent<Rigidbody2D>();
         boxCollider2D = GetComponent<BoxCollider2D>();
+        currentRenderer = GetComponent<Renderer>();
     }
 
     public void UpdateWithCard(CardDataScriptableObject cardDataScriptableObject)
     {
+        int tempRandom;
+        do
+        {
+            tempRandom = Mathf.FloorToInt(Random.Range(0, 3));
+        } while (tempRandom == randInt);
+
+        randInt = tempRandom;
+
+        currentRenderer.material.SetFloat("_FaceChoice", randInt);
         maxSpeed *= cardDataScriptableObject.moveSpeedModifier;
         speedAccel *= cardDataScriptableObject.moveSpeedModifier;
 
@@ -89,7 +105,8 @@ public class BasicPlatformer : MonoBehaviour
     }
 
     // Update is called once per frame
-    void FixedUpdate()
+    //Keep it update cuz we want to process input every frame
+    void Update()
     {
         //The classic frame chucking technique when it gets to laggy just dont calculate anything
         //Prevents the player from falling through the floor
