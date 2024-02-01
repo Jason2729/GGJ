@@ -103,7 +103,7 @@ MonoBehaviour:
   _projectilePrefab: {fileID: 5349279521926361715, guid: 250e1f170ff84f249bca0487a1f98b94, type: 3}
   _projectilePrefab1: {fileID: 8699409588507889774, guid: d417c7784fd80184797a92efece5421e, type: 3}
   _spawnPoint: {fileID: 7597898011351954402}
-  awareness: 10
+  awareness: 11
   audioSource: {fileID: 5869587391193886720}
   shootAudioClip: {fileID: 8300000, guid: 539200e5ce02d06449330af5c8786095, type: 3}
 --- !u!82 &5869587391193886720

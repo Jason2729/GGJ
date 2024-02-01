@@ -7,13 +7,14 @@ using UnityEngine.UIElements;
 public class Health : MonoBehaviour
 {
     [SerializeField, Range(1,100)] private int maxHp = 10;
-    [SerializeField] private GameObject Agent;
+    private GameObject Agent;
     public int currentHp;
 
     // Start is called before the first frame update
     void Start()
     {
         currentHp = maxHp;
+        Agent = gameObject;
     }
     public void takeDamage(int damage)
     {
@@ -25,7 +26,7 @@ public class Health : MonoBehaviour
             {
                 Agent.GetComponent<PlayerController>().Die();
             }
-            if (Agent.GetComponent<PlayerController>() != null) 
+            if (Agent.GetComponent<EnemyAI>() != null) 
             {
                 Agent.GetComponent<EnemyAI>().Die();
             }

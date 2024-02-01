@@ -23,6 +23,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+
     }
 
     public void Die()
@@ -31,6 +32,28 @@ public class PlayerController : MonoBehaviour
         // For now just restore hp
         healthScript.currentHp = 10;
         //Destroy(gameObject);
+    }
+
+    /*public void attack()
+    {
+        Debug.Log("player attacking!");
+        // Attack collison with enemy tag
+        attackPoint.OnTriggerEnter2D;
+        // some effect on player
+        if (collision.tag == "Enemy")
+        {
+            collision.GetComponent<Health>().takeDamage(1);
+        }
+        //Destroy(gameObject);
+    }*/
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        // some effect on player
+        if (collision.tag == "Enemy" && Input.GetKey(KeyCode.Q))
+        {
+            collision.GetComponent<Health>().takeDamage(1);
+        }
     }
 
 }
